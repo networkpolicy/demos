@@ -1,0 +1,23 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: database-policy
+  namespace: default
+spec:
+  endpointSelector:
+    matchLabels:
+      tier: db
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            tier: backend
+      toPorts:
+        - ports:
+            - port: "7379"
+    - fromCIDR:
+        - 102.213.50.174/32
+      toPorts:
+        - ports:
+            - port: "443"
+  egress:
+    - {}

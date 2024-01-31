@@ -1,0 +1,34 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: backend-policy
+spec:
+  endpointSelector: 
+    matchLabels:
+       tier: backend
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            tier: frontend
+      toPorts:
+        - ports:
+            - port: "80"
+              protocol: TCP
+          rules:
+            http:
+            - method: "GET"
+              path: "/docs"
+  egress:
+    - toEndpoints:
+        - matchLabels:
+            tier: database
+      toPorts:
+        - ports:
+            - port: "7379"
+    - toFQDNs:
+        - matchPattern: "*.cloud.google.com"
+      toPorts:
+        - ports:
+            - port: "443"
+        - ports:
+            - port: "80"
