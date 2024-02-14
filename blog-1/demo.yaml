@@ -58,13 +58,13 @@ spec:
   selector:
     matchLabels:
       app: demo
-      tier: db
+      tier: database
 
   template:
     metadata:
       labels:
         app: demo
-        tier: db
+        tier: database
         app.kubernetes.io/name: database
     spec:
       containers:
@@ -113,4 +113,4 @@ spec:
     targetPort: 7379
   selector:
     app: demo
-    tier: db
+    tier: database

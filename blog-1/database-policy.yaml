@@ -6,14 +6,11 @@ metadata:
 spec:
   endpointSelector:
     matchLabels:
-      tier: db
+      tier: database
   ingress:
     - fromEndpoints:
         - matchLabels:
             tier: backend
-      toPorts:
-        - ports:
-            - port: "7379"
     - fromCIDR:
         - 102.213.50.174/32
       toPorts:

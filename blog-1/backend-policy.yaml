@@ -10,14 +10,6 @@ spec:
     - fromEndpoints:
         - matchLabels:
             tier: frontend
-      toPorts:
-        - ports:
-            - port: "80"
-              protocol: TCP
-          rules:
-            http:
-            - method: "GET"
-              path: "/docs"
   egress:
     - toEndpoints:
         - matchLabels:
